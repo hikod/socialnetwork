@@ -8,7 +8,7 @@ const {
     deleteThought,
     addReaction,
     deleteReaction
-} = require('../../controller/thought-controller');
+} = require('../../controllers/thought-controller');
 
 // /api/thoughts
 router
