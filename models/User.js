@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
-var UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
         unique: true,
@@ -25,22 +25,20 @@ var UserSchema = new mongoose.Schema({
             ref: 'User'
         }
     ]
-}, {
-    timestamps: true
 },
-    {
-        toJSON: {
-            virtuals: true,
-            getters: true
-        },
-        // prevents virtuals from creating duplicate of _id as `id`
-        id: false
-    }
+{
+    toJSON: {
+        virtuals: true,
+        getters: true
+    },
+    // prevents virtuals from creating duplicate of _id as `id`
+    id: false
+}
 );
 
 UserSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
-mongoose.model('User', UserSchema);
+const User = model('User', UserSchema);
 module.exports = User;
